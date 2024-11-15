@@ -44,5 +44,28 @@
             "detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
         }
     ],
-    "version": "2.0.0"
+    "version": "2.0.0",
+    "configurations": [
+    {
+        "name": "Executar com Console Externo",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            }
+        ],
+        "preLaunchTask": "build"
+    }
+]
+
 }
