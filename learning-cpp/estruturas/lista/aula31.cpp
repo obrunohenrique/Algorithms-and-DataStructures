@@ -1,31 +1,18 @@
+/*
+o número de linhas é igual ao num (escolhido + 1)/2
+Até o número da linha(i) eu não quero printar(j)
+*/
+
 #include <iostream>
-#include <list>
 
 using namespace std;
 
 int main() {
 
-    list<int> aula;
-    int tam=10;
-    list<int>::iterator it;
+    int linhas, colunas, num;
 
-    for(int i=0; i<tam; i++) {
-        aula.push_back(i);
-    }
+    int matriz[linhas][num];    
 
-    // it=aula.begin();
-    // advance(it, 7);
-
-    // aula.insert(it, 0);
-
-
-    cout << "Tamanho da lista: " << aula.size() << endl;
-
-    tam = aula.size();
-    for(int i=0; i<tam; i++) {
-        cout << aula.back() << "\n";
-        aula.pop_back();
-    }
 
     return 0;
 }
