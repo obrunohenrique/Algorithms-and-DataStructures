@@ -21,6 +21,8 @@ public:
     Article( const string&, unsigned long, double );
     ~Article();
 
+    Article(const Article& objeto);
+
     string getName() { return name; } 
     double getPrice() { return price; }
 
@@ -30,7 +32,7 @@ public:
         cout << "Name: " << name << endl;
         cout << "Number: " << num << endl;
         cout << "Price: " << price << endl;
-        cout << "------------------------------" << endl;
+        cout << "------------------------------" << "\n\n";
         // system("pause");
     } 
     

@@ -32,6 +32,8 @@ int test() {
 
     local_test.setPrice(70);
 
+    cout << Article::getCont() << endl;
+
     return 0;
 }
 
