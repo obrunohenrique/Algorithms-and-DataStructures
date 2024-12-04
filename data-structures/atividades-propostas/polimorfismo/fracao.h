@@ -6,11 +6,16 @@ class Fracao {
 
     private: 
 
-    long numerador;
-    long denominador;
+        long numerador;
+        long denominador;
 
     public:
 
-    Fracao(long numerador=0, long denominador=1);
-    ~Fracao();
+        Fracao(long numerador = 0  , long denominador = 1);
+        ~Fracao();
+        friend ostream& operator<<(ostream& os, const Fracao& a);
+
+        Fracao operator-();
+        Fracao operator++();
+        Fracao operator--();
 };
