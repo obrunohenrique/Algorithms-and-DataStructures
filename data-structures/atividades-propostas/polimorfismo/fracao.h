@@ -15,7 +15,18 @@ class Fracao {
         ~Fracao();
         friend ostream& operator<<(ostream& os, const Fracao& a);
 
-        Fracao operator-();
-        Fracao operator++();
-        Fracao operator--();
+        Fracao& operator-();
+        Fracao& operator++();
+        Fracao& operator--();
+
+        Fracao& operator+=(const Fracao&);
+        Fracao& operator-=(const Fracao&);
+        Fracao& operator *=(const Fracao&);
+        Fracao& operator /=(const Fracao&);
+
+        Fracao operator+(const Fracao&) const;
+        Fracao operator-(const Fracao&) const;
+        Fracao operator*(const Fracao&) const;
+        Fracao operator/(const Fracao&) const;
+        
 };
