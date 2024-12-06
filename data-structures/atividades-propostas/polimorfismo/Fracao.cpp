@@ -13,12 +13,11 @@ Fracao::Fracao(long numerador, long denominador)
         this->numerador = -numerador;
         this->denominador = -denominador; 
     }
-    cout << "Objeto criado: " << this->numerador << "/" << this->denominador << endl;
 }
 
 Fracao::~Fracao() {
-        cout << "Fracao excluida: " << numerador << "/" << denominador << endl;
-    }
+    cout << "";
+}
 
 ostream& operator<<(ostream& os, const Fracao& a)
 {
