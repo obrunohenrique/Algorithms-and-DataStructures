@@ -59,53 +59,43 @@ int HashTable::h(string chave) {
 }
 
 int HashTable::hash(string chave) {
-    return h(chave) % 101;
+    int id = h(chave) % 101;
+
+    int newId = id;
+
+    for(int j=0; j<21; j++) {
+        if(tabela[newId] == "")
+            return newId;
+        else
+            newId = (id + j*j + 23*j) % 101;
+    }
+
+    return -1;
 }
 
 void HashTable::inserir(string valor) {
-    int id = hash(valor), j=1;
+    int id = hash(valor);
 
-    if(busca(valor) != -1) {
+    int b = busca(valor);
+    if(b != -1)
         return;
-    }
 
-    if(tabela[id] == "" ) {
+    if(id != -1) {
         tabela[id] = valor;
-        ++num_indices;
-    }
-    else {
-        int newID = hash(valor) + j*j + 23*j;
-        while (j<20 && tabela[newID] != "")
-        {
-            j++;
-            int newID = hash(valor) + j*j + 23 + j;
-        }
-
-        if(tabela[newID] == "") {
-            tabela[newID] = valor;
-            ++num_indices;
-        } 
-
+        num_indices++;
     }
 }
 
 int HashTable::busca(string valor) {
-    int id = hash(valor), j=1;
+    int id = h(valor) % 101;
 
-    if(tabela[id] == valor)
-        return id;
-    else {
-        
-        int newID = hash(valor) + j*j + 23 + j;
-        while (j<20 && tabela[newID] != valor)
-        {
-            j++;
-            int newID = hash(valor) + j*j + 23 + j;
-        }
+    int newId = id;
 
-        if(tabela[newID] == valor) {
-            return newID;
-        }
+    for(int j=0; j<21; j++) {
+        if(tabela[newId] == valor)
+            return newId;
+        else
+            newId = (id + j*j + 23*j) % 101;
     }
 
     return -1;
