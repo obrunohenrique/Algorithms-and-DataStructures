@@ -27,7 +27,6 @@ No::~No()
 }
 
 
-
 class Avl
 {
 private:
@@ -64,16 +63,16 @@ private:
         
     }
 
-    int deletar(int num, No*& r) {
+    No* deletar(int num, No*& r) {
         if(r == nullptr){
-            return -1;
+            return r;
         }
 
         if(r->valor > num) {
-            deletar(num, r->esquerda);
+            r->esquerda = deletar(num, r->esquerda);
 
         } else if(r->valor < num) {
-            deletar(num, r->direita);
+            r->direita = deletar(num, r->direita);
 
         } else {
             if(r->direita == nullptr) {
@@ -95,7 +94,25 @@ private:
             }
         }
 
-        return 0;
+        int balanco = getBalanco(r);
+
+        // desbalanco à direita - sub-arvore direita
+        if(balanco < -1 && getBalanco(r->direita) <= 0) {
+            return L_rotation(r);
+        } 
+        if(balanco > 1 && getBalanco(r->esquerda) >= 0) { //desbalanco à esquerda - sub-arvore esquerda
+            return R_rotation(r);
+        }
+        if(balanco > 1 && getBalanco(r->esquerda) == -1) { //desbalanco à esquerda - sub-arvore direita
+            r->esquerda = L_rotation(r->esquerda);
+            return R_rotation(r);
+        } 
+        if(balanco < -1 && getBalanco(r->direita) == 1) {// desbalanco à direita - sub-arvore esquerda
+            r->direita = R_rotation(r->direita);
+            return L_rotation(r);
+        }
+
+        return r;
     }
 
     void preOrdem(No * r) {
@@ -209,8 +226,8 @@ public:
         raiz = inserir(num, raiz); 
     }
 
-    int deletar(int num) {
-        return deletar(num, raiz);
+    void deletar(int num) {
+        deletar(num, raiz);
     }
 
     void preOrdem() {
