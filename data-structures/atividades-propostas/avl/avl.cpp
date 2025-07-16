@@ -1,28 +1,30 @@
-#include <iostream>
-#include "avl.h"
+int main()
+{
+    Avl avl;
 
-using namespace std;
+    int n;
+    cin >> n;
 
-int main() {
+    for(int i = 0; i < n; i++)
+    {
+        char command;
+        cin >> command;
 
-    Avl a;
+        int num;
+        cin >> num;
 
-    a.inserir(1);
-    a.inserir(2);
-    a.inserir(3);
-    a.inserir(4);
-    a.inserir(5);
-    a.inserir(6);
-    a.deletar(4);
-    a.deletar(5);
+        if(command == 'i')
+            avl.inserir(num);
+        else if(command == 'd')
+            avl.deletar(num);
+    }
 
-
-    a.preOrdem();
+    avl.preOrdem();
     cout << endl;
-    a.emOrdem();
+    avl.emOrdem();
     cout << endl;
-    a.posOrdem();
-
+    avl.posOrdem();
+    cout << endl;
 
     return 0;
 }

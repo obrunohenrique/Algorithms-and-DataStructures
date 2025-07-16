@@ -1,6 +1,3 @@
-#ifndef _AVL_
-#define _AVL_
-
 #include <iostream>
 using namespace std;
 
@@ -27,6 +24,7 @@ No::~No()
 }
 
 
+
 class Avl
 {
 private:
@@ -45,16 +43,20 @@ private:
 
         // desbalanco à direita - sub-arvore direita
         if(balanco < -1 && num >= r->direita->valor) {
+            cout << r->valor << endl;
             return L_rotation(r);
         } 
         if(balanco > 1 && num < r->esquerda->valor) { //desbalanco à esquerda - sub-arvore esquerda
+            cout << r->valor << endl;
             return R_rotation(r);
         }
         if(balanco > 1 && num >= r->esquerda->valor) { //desbalanco à esquerda - sub-arvore direita
+            cout << r->valor << endl;
             r->esquerda = L_rotation(r->esquerda);
             return R_rotation(r);
         } 
         if(balanco < -1 && num < r->direita->valor) {// desbalanco à direita - sub-arvore esquerda
+            cout << r->valor << endl;
             r->direita = R_rotation(r->direita);
             return L_rotation(r);
         }
@@ -79,10 +81,12 @@ private:
                 No* temp = r;
                 r = r->esquerda;
                 delete temp;
+                return r;
             } else if(r->esquerda == nullptr) {
                 No* temp = r;
                 r = r->direita;
                 delete temp;
+                return r;
             } else {
                 No*  sucessor = r->direita;
                 while (sucessor->esquerda != nullptr)
@@ -90,24 +94,24 @@ private:
                     sucessor = sucessor->esquerda;
                 }
                 r->valor = sucessor->valor;
-                delete(sucessor->valor, r->direita);
+                r->direita = deletar(sucessor->valor, r->direita);
             }
         }
 
         int balanco = getBalanco(r);
 
-        // desbalanco à direita - sub-arvore direita
-        if(balanco < -1 && getBalanco(r->direita) <= 0) {
-            return L_rotation(r);
-        } 
-        if(balanco > 1 && getBalanco(r->esquerda) >= 0) { //desbalanco à esquerda - sub-arvore esquerda
+        if(balanco == 2 && getBalanco(r->esquerda) >= 0){
+            cout << r->valor << endl;
             return R_rotation(r);
-        }
-        if(balanco > 1 && getBalanco(r->esquerda) == -1) { //desbalanco à esquerda - sub-arvore direita
+        } else if(balanco == 2 && getBalanco(r->esquerda) == -1) {
+            cout << r->valor << endl;
             r->esquerda = L_rotation(r->esquerda);
             return R_rotation(r);
-        } 
-        if(balanco < -1 && getBalanco(r->direita) == 1) {// desbalanco à direita - sub-arvore esquerda
+        } else if(balanco == -2 && getBalanco(r->direita) <= 0) {
+            cout << r->valor << endl;
+            return L_rotation(r);
+        } else if(balanco == -2 && getBalanco(r->direita) == 1) {
+            cout << r->valor << endl;
             r->direita = R_rotation(r->direita);
             return L_rotation(r);
         }
@@ -227,7 +231,7 @@ public:
     }
 
     void deletar(int num) {
-        deletar(num, raiz);
+        raiz = deletar(num, this->raiz);
     }
 
     void preOrdem() {
@@ -268,6 +272,3 @@ Avl::~Avl()
 {
 }
 
-
-
-#endif

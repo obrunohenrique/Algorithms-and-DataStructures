@@ -70,7 +70,7 @@ private:
                     sucessor = sucessor->esquerda;
                 }
                 r->valor = sucessor->valor;
-                delete(sucessor->valor, r->direita);
+                deletar(sucessor->valor, r->direita);
             }
         }
 
